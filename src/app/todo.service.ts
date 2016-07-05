@@ -37,4 +37,11 @@ export class TodoService {
     Object.assign(todo, values);
     return todo;
   }
+
+  toggleTodoComplete(todo: Todo): Todo {
+    let updated = this.updateTodoById(todo.id, {
+      complete: !todo.complete
+    });
+    return updated;
+  }
 }
