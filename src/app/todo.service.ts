@@ -28,4 +28,13 @@ export class TodoService {
     this.todos = this.todos.filter(todo => todo.id !== id)
     return this;
   }
+
+  updateTodoById(id: number, values: Object = {}): Todo {
+    let todo = this.getTodoById(id);
+    if (!todo) {
+      return null;
+    }
+    Object.assign(todo, values);
+    return todo;
+  }
 }
