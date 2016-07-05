@@ -19,4 +19,8 @@ export class TodoService {
   getAllTodos(): Todo[] {
     return this.todos;
   }
+
+  getTodoById(id: number): Todo {
+    return this.todos.filter(todo => todo.id === id).pop();
+  }
 }

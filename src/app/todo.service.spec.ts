@@ -25,3 +25,17 @@ describe('#getAllTodos()', () => {
     expect(service.getAllTodos()).toEqual([todo1, todo2]);
   }));
 });
+
+describe('#addTodo(todo)', () => {
+  beforeEachProviders(() => [TodoService]);
+
+  it('should automatically assign an incrementing id',
+      inject([TodoService], (service: TodoService) => {
+    let todo1 = new Todo({title: 'Hello 1', completed: false});
+    let todo2 = new Todo({title: 'Hello 2', completed: true});
+    service.addTodo(todo1);
+    service.addTodo(todo2);
+    expect(service.getTodoById(1)).toEqual(todo1);
+    expect(service.getTodoById(2)).toEqual(todo2);
+  }));
+});
