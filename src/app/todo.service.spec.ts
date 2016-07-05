@@ -39,3 +39,30 @@ describe('#addTodo(todo)', () => {
     expect(service.getTodoById(2)).toEqual(todo2);
   }));
 });
+
+describe('#deleteTodoById(id)', () => {
+  beforeEachProviders(() => [TodoService]);
+
+  it('should remove todo with corresponding id',
+      inject([TodoService], (service: TodoService) => {
+    let todo1 = new Todo({title: 'Hello 1', completed: false});
+    let todo2 = new Todo({title: 'Hello 2', completed: true});
+    service.addTodo(todo1);
+    service.addTodo(todo2);
+    expect(service.getAllTodos()).toEqual([todo1, todo2]);
+    service.deleteTodoById(1);
+    expect(service.getAllTodos()).toEqual([todo2]);
+    service.deleteTodoById(2);
+    expect(service.getAllTodos()).toEqual([]);
+  }));
+
+  it('should not removing anything if todo with corresponding id is not found', inject([TodoService], (service: TodoService) => {
+    let todo1 = new Todo({title: 'Hello 1', complete: false});
+    let todo2 = new Todo({title: 'Hello 2', complete: true});
+    service.addTodo(todo1);
+    service.addTodo(todo2);
+    expect(service.getAllTodos()).toEqual([todo1, todo2]);
+    service.deleteTodoById(3);
+    expect(service.getAllTodos()).toEqual([todo1, todo2]);
+  }));
+});
