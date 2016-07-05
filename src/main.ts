@@ -6,5 +6,4 @@ if (environment.production) {
   enableProdMode();
 }
 
-bootstrap(AppComponent);
-
+bootstrap(AppComponent, []);
